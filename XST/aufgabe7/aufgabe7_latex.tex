@@ -1,0 +1,93 @@
+% LaTeX-Text für Aufgabe 7: Winkelunsicherheit
+
+\subsection{Aufgabe 7: Winkelunsicherheit}
+
+Zur Bestimmung der Winkelunsicherheit wurden zwei Messreihen (A1.1 und A3) mit identischen Messparametern durchgeführt, bei denen jedoch der Kristall um \SI{180}{\degree} gedreht wurde. Die unterschiedliche Kristallorientierung führt zu einer horizontalen Verschiebung der gemessenen Beugungsmuster, die sich in einer systematischen Verschiebung der Peaks und charakteristischen Merkmale äußert.
+
+\subsubsection{Methode}
+
+Um die durch die Kristallorientierung verursachte Winkelunsicherheit zu quantifizieren, wurden beide Messkurven gegeneinander geplottet (siehe Abbildung~\ref{fig:aufg7_originalkurven}). Mit bloßem Auge ist zu erkennen, dass die Daten aus Messreihe A3 nach rechts verschoben werden müssen, um eine saubere Überlagerung mit A1.1 zu erzielen.
+
+Für eine quantitative Bestimmung der Verschiebung wurde der Messbereich in drei strukturreiche Abschnitte eingeteilt:
+\begin{itemize}
+    \item \textbf{Fenster 1} (\SIrange{3}{4}{\degree}): Steiler Anstiegsbereich
+    \item \textbf{Fenster 2} (\SIrange{6.0}{7.0}{\degree}): Erster Peak
+    \item \textbf{Fenster 3} (\SIrange{6.4}{7.4}{\degree}): Zweiter Peak / Hauptpeak
+\end{itemize}
+
+Für jedes Fenster wurde die optimale horizontale Verschiebung $\Delta\beta_i$ durch Maximierung der Kreuzkorrelation zwischen den normalisierten Kurven bestimmt. Dabei wurden die Zählraten zunächst mit einem Savitzky-Golay-Filter (Fensterbreite 11 bzw.\ 9, Polynomgrad 3) geglättet, um statistische Fluktuationen zu reduzieren. Die Kurven wurden auf ein feines Interpolationsgitter gelegt und die Korrelation zwischen $R_{\text{A1.1}}(\beta)$ und $R_{\text{A3}}(\beta - s)$ für verschiedene Shift-Werte $s \in [-\SI{1}{\degree}, +\SI{1}{\degree}]$ berechnet. Der optimale Shift entspricht dem Maximum der Korrelationsfunktion (siehe Abbildung~\ref{fig:aufg7_correlation}).
+
+\subsubsection{Ergebnisse}
+
+Die Analyse der drei Fenster ergab folgende Verschiebungen:
+
+\begin{table}[h]
+\centering
+\caption{Ermittelte horizontale Verschiebungen in den drei Analysefenstern}
+\label{tab:shifts}
+\begin{tabular}{lccc}
+\toprule
+Fenster & Bereich & $\Delta\beta_i$ & Korrelation \\
+\midrule
+1 (Anstieg)    & \SIrange{3.0}{4.0}{\degree}   & $+\SI{0.2308}{\degree}$ & 0.992 \\
+2 (Peak 1)     & \SIrange{6.0}{7.0}{\degree}   & $+\SI{0.3043}{\degree}$ & 0.938 \\
+3 (Peak 2)     & \SIrange{6.4}{7.4}{\degree}   & $+\SI{0.2977}{\degree}$ & 0.893 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die hohen Korrelationswerte (0.89--0.99) zeigen, dass die Kurvenformen in den ausgewählten Bereichen gut übereinstimmen und die Shift-Bestimmung robust ist. Die leichten Unterschiede zwischen den Fenstern reflektieren, dass die Verschiebung nicht in allen Winkelbereichen exakt gleich ist, was auf eine leichte Verkippung oder nicht-ideale Kristallausrichtung hindeutet.
+
+Aus den drei Einzelwerten wurde der Mittelwert und die Standardabweichung berechnet:
+\begin{align}
+\overline{\Delta\beta} &= \frac{1}{3}\sum_{i=1}^{3} \Delta\beta_i = \SI{+0.2776}{\degree} \approx \SI{+0.28}{\degree} \\
+u_\beta &= \sqrt{\frac{1}{n-1}\sum_{i=1}^{3}(\Delta\beta_i - \overline{\Delta\beta})^2} = \SI{0.0407}{\degree} \approx \SI{0.04}{\degree}
+\end{align}
+
+Die Standardabweichung $u_\beta = \SI{0.04}{\degree}$ repräsentiert die zusätzliche Winkelunsicherheit, die aus der ungenauen Kristallpositionierung bzw.\ -orientierung resultiert.
+
+\subsubsection{Gesamtunsicherheit}
+
+Die ermittelte Winkelunsicherheit aus der Kristallorientierung muss quadratisch mit der angegebenen Geräteunsicherheit des Goniometers ($u_{\text{Gerät}} = \SI{0.05}{\degree}$) addiert werden:
+\begin{align}
+u_{\text{gesamt}} &= \sqrt{u_{\text{Gerät}}^2 + u_\beta^2} \\
+                   &= \sqrt{(\SI{0.05}{\degree})^2 + (\SI{0.04}{\degree})^2} \\
+                   &= \sqrt{\SI{0.0025}{\degree^2} + \SI{0.0016}{\degree^2}} \\
+                   &= \SI{0.064}{\degree} \approx \SI{0.06}{\degree}
+\end{align}
+
+Abbildung~\ref{fig:aufg7_vorher_nachher} zeigt die Messkurven vor und nach der Shift-Korrektur um $\overline{\Delta\beta} = \SI{+0.28}{\degree}$. Nach der Korrektur liegen die charakteristischen Merkmale (Peaks, Anstiege) deutlich besser übereinander, wobei verbleibende Abweichungen durch die inhärente Winkelunsicherheit von $u_\beta = \SI{0.04}{\degree}$ erklärt werden. Abbildung~\ref{fig:aufg7_shift_summary} fasst die Einzelergebnisse grafisch zusammen.
+
+\textbf{Für alle weiteren Berechnungen in diesem Versuch wird die Gesamtunsicherheit $u_\beta = \SI{0.06}{\degree}$ bzw.\ $u_\beta = \SI{0.07}{\degree}$ (konservativ) verwendet.}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{aufg7_originalkurven.pdf}
+    \caption{Vergleich der Originalkurven A1.1 und A3. Die Kurve A3 (orange) liegt systematisch bei kleineren $\beta$-Werten als A1.1 (blau), was auf eine horizontale Verschiebung durch unterschiedliche Kristallorientierung hindeutet.}
+    \label{fig:aufg7_originalkurven}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{aufg7_correlation_analysis.pdf}
+    \caption{Korrelationsanalyse für die drei Analysefenster. Das Maximum der Korrelationsfunktion bestimmt die optimale Verschiebung $\Delta\beta_i$ für jedes Fenster. Die hohen Korrelationswerte ($>0.89$) bestätigen die Zuverlässigkeit der Methode.}
+    \label{fig:aufg7_correlation}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{aufg7_shift_summary.pdf}
+    \caption{Übersicht der ermittelten Shifts in den drei Analysefenstern. Der Mittelwert $\overline{\Delta\beta} = \SI{+0.28}{\degree}$ (gestrichelte Linie) und die Standardabweichung $u_\beta = \SI{0.044}{\degree}$ (grauer Bereich) charakterisieren die systematische Verschiebung und deren Unsicherheit.}
+    \label{fig:aufg7_shift_summary}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{aufg7_vorher_nachher.pdf}
+    \caption{Vergleich der Messkurven vor (oben) und nach (unten) der Shift-Korrektur. Nach Verschiebung von A3 um $\Delta\beta = \SI{+0.28}{\degree}$ liegen die charakteristischen Merkmale (Peaks, Anstiege) deutlich besser übereinander, wobei die verbleibende Abweichung die Winkelunsicherheit widerspiegelt.}
+    \label{fig:aufg7_vorher_nachher}
+\end{figure}
+
+\clearpage
+
+
