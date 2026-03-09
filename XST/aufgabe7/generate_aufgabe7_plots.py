@@ -12,7 +12,7 @@ from scipy.signal import savgol_filter
 # SETUP
 # ==============================================================================
 
-plt.rcParams["text.usetex"] = True
+# plt.rcParams["text.usetex"] = True
 plt.rcParams['font.size'] = 12
 plt.rcParams['axes.labelsize'] = 16
 plt.rcParams['axes.titlesize'] = 17
@@ -224,10 +224,10 @@ ax1.plot(dfA3.loc[mask3, 'beta'], dfA3.loc[mask3, 'R_smooth'],
 
 # Markiere Analysefenster
 for i, (bmin, bmax) in enumerate(windows):
-    ax1.axvspan(bmin, bmax, alpha=0.10, color=f'C{i+2}', zorder=1)
+    ax1.axvspan(bmin, bmax, alpha=0.10, color='red', zorder=1)
 
 ax1.set_xlabel(r'Winkel $\theta\ /\ ^\circ$', fontweight='bold')
-ax1.set_ylabel(r'Zählrate R_z / 1/s', fontweight='bold')
+ax1.set_ylabel(r'Zählrate $R_z$ / 1/s', fontweight='bold')
 ax1.grid(True, alpha=0.35, linestyle='--')
 ax1.legend(fontsize=14, loc='upper left')
 ax1.set_ylim(-20, 1100)
@@ -246,16 +246,16 @@ ax2.plot(dfA3_shifted.loc[mask3_shifted, 'beta'], dfA3_shifted.loc[mask3_shifted
 
 # Markiere verschobene Fenster
 for i, (bmin, bmax) in enumerate(windows):
-    ax2.axvspan(bmin + mean_shift, bmax + mean_shift, alpha=0.10, color=f'C{i+2}', zorder=1)
+    ax2.axvspan(bmin + mean_shift, bmax + mean_shift, alpha=0.10, color='red', zorder=1)
 
 # Unsicherheitsbereich beim Peak anzeigen
 peak_region_center = 7.0
 ax2.axvspan(peak_region_center - std_shift, peak_region_center + std_shift,
            alpha=0.15, color='red', zorder=2,
-           label=f'Unsicherheit: $\\pm {0.0438:.4f}^\\circ$')
+           label=f'Unsicherheit: $\\pm {0.0438:.3f}^\\circ$')
 
 ax2.set_xlabel(r'Winkel $\theta\ /\ ^\circ$', fontweight='bold')
-ax2.set_ylabel(r'Zählrate R_z / 1/s', fontweight='bold')
+ax2.set_ylabel(r'Zählrate $R_z$ / 1/s', fontweight='bold')
 ax2.grid(True, alpha=0.35, linestyle='--')
 ax2.legend(fontsize=14, loc='upper left')
 ax2.set_ylim(-20, 1100)
